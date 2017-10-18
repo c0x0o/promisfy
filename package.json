@@ -1,0 +1,22 @@
+{
+  "name": "promisfy",
+  "version": "1.0.0",
+  "description": "transform a node-style asynchronous function to promise-style function, very handy for async/await",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanteLee/promisfy.git"
+  },
+  "keywords": [
+    "promise"
+  ],
+  "author": "nEk0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanteLee/promisfy/issues"
+  },
+  "homepage": "https://github.com/DanteLee/promisfy#readme"
+}
