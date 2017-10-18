@@ -2,7 +2,7 @@
 
 ## description
 
-this package is used for transform a node-style asynchronous function to a promise-style function. It's very handy if you are using async/await.
+this package is used for transform a node-style asynchronous function to a promise-style function. It's very handy if you are using async/await. After `v1.1.0`, you can also use it for a event callback.
 
 a node-style asynchronous function should be like this:
 
@@ -31,8 +31,10 @@ very simple to use:
 
 ```javascript
 const fs = require('fs');
-const promisfy = require('promisfy');
+const http = require('http');
+const {promisfy, waitFor} = require('promisfy');
 
+// using promisfy
 const readFile = promisfy(fs.readFile);
 
 async function main() {
@@ -46,4 +48,17 @@ main().then(function(content) {
     console.log(content);
 })
 
+// using waitFor
+// receive post data
+http.createServer(80, function(req, res) {
+    async function handleRequest(req, res) {
+        if (req.method === 'POST') {
+            req.body = await waitFor(req.sock, 'data');
+        }
+
+        // now you can do something with req.body
+    }
+})
 ```
+
+Be attention, `waitFor` the `data` or `stream` event will make this function add listener to `data`, `end` and `error` events. All data will be returned only if there is no `error` event triggered and the `end` event is triggered. As for other event, only the second argument will be passed to the Promise
