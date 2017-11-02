@@ -23,6 +23,28 @@ function promisfy(fn) {
     }
 }
 
+// for callbacks without error for its first argument
+function promisfyNoError(fn) {
+    return function() {
+        let args = arguments;
+        let that = this;
+
+        return new Promise(function(resolve, reject) {
+            function callback(result) {
+                resolve(result);
+            }
+
+            let fnArgs = [];
+            for (let i of args) {
+                fnArgs.push(i);
+            }
+            fnArgs.push(callback);
+
+            fn.apply(that, fnArgs);
+        });
+    }
+}
+
 function waitFor(obj, evt) {
     function normalEvent(resolve, reject) {
         function callback(e, result) {
@@ -66,3 +88,4 @@ function waitFor(obj, evt) {
 
 exports.promisfy = promisfy;
 exports.waitFor = waitFor;
+exports.promisfyNoError = promisfyNoError;

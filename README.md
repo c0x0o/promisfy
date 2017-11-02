@@ -35,6 +35,8 @@ const http = require('http');
 const {promisfy, waitFor} = require('promisfy');
 
 // using promisfy
+// if you are using some some callbacks without error as its first argument,
+// try promisfyNoError()
 const readFile = promisfy(fs.readFile);
 
 async function main() {
