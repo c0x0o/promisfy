@@ -1,6 +1,6 @@
 {
   "name": "promisfy",
-  "version": "1.0.1",
+  "version": "1.1.2",
   "description": "transform a node-style asynchronous function to promise-style function, very handy for async/await",
   "main": "index.js",
   "scripts": {
