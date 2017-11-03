@@ -1,7 +1,6 @@
-function promisfy(fn) {
+function promisfy(fn, ctx) {
     return function() {
         let args = arguments;
-        let that = this;
 
         return new Promise(function(resolve, reject) {
             function callback(e, result) {
@@ -18,16 +17,15 @@ function promisfy(fn) {
             }
             fnArgs.push(callback);
 
-            fn.apply(that, fnArgs);
+            fn.apply(ctx, fnArgs);
         });
     }
 }
 
 // for callbacks without error for its first argument
-function promisfyNoError(fn) {
+function promisfyNoError(fn, ctx) {
     return function() {
         let args = arguments;
-        let that = this;
 
         return new Promise(function(resolve, reject) {
             function callback(result) {
@@ -40,7 +38,7 @@ function promisfyNoError(fn) {
             }
             fnArgs.push(callback);
 
-            fn.apply(that, fnArgs);
+            fn.apply(ctx, fnArgs);
         });
     }
 }

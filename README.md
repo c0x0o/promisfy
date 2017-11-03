@@ -64,3 +64,13 @@ http.createServer(80, function(req, res) {
 ```
 
 Be attention, `waitFor` the `data` or `stream` event will make this function add listener to `data`, `end` and `error` events. All data will be returned only if there is no `error` event triggered and the `end` event is triggered. As for other event, only the second argument will be passed to the Promise
+
+After v1.1.4, you can pass a context to the `promisfy` as its second argument. Context will be used as the context of `fn`, for example:
+
+```javascript
+function callback() {
+    console.log(this)
+}
+
+promisfy(fs.readFile, fs);
+```
