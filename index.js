@@ -3,11 +3,15 @@ function promisfy(fn, ctx) {
         let args = arguments;
 
         return new Promise(function(resolve, reject) {
-            function callback(e, result) {
+            function callback(e, ...result) {
                 if (e) {
                     reject(e);
                 } else {
-                    resolve(result);
+                    if(result.length == 1){
+                        resolve(result[0]);
+                    }else{
+                        resolve(result);
+                    }
                 }
             }
 

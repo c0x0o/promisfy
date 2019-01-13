@@ -74,3 +74,14 @@ function callback() {
 
 promisfy(fs.readFile, fs);
 ```
+
+If your callback function expects more than just 2 arguments, the 2nd through nth arguments will be automatically bundled in an array when the promise resolves.
+```javascript
+foo(inputArg1, (error,responseArg1,responseArg2,responseArg3) => {})
+
+```
+can be promisfied like this:
+```javascript
+var [responseArg1,responseArg2,responseArg3] = await promisfy(foo)(inputArg1)
+
+```
